@@ -17,7 +17,7 @@ Includes:
 ## Setup the new project
 
 - `git clone --origin boilerplate https://github.com/leapdao/cli-boilerplate.git <your-project-name>`
-- `git remote origin add git@github.com:leapdao/<your-project-name>.git && <your-project-name>`
+- `cd <your-project-name> && git remote add origin git@github.com:leapdao/<your-project-name>.git`
 - change name in `package.json`
 - `yarn`
 - Enjoy :-)
