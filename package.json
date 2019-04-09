@@ -1,7 +1,7 @@
 {
   "name": "leap-lambda-boilerplate",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "license": "MPL-2.0",
   "author": "LeapDAO <team@leapdao.org>",
   "scripts": {
