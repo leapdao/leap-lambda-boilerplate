@@ -1,22 +1,14 @@
-# LeapDAO cli tool/library boilerplate
+# AWS Lambda boilerplate
 
-Boilerplate with predefined code style
 
-Includes:
-
-- eslint config
-- jest config
-- prettier config
-- .editorconfig
-
-## Prerequisite
+## Prerequisites
 
 - Node.js 8+
 - Yarn
 
-## Setup the new project
+## Usage
 
-- `git clone --origin boilerplate https://github.com/leapdao/cli-boilerplate.git <your-project-name>`
+- `git clone --origin boilerplate https://github.com/leapdao/lambda-boilerplate.git <your-project-name>`
 - `cd <your-project-name> && git remote add origin git@github.com:leapdao/<your-project-name>.git`
 - change name in `package.json`
 - `yarn`

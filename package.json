@@ -1,8 +1,9 @@
 {
-  "name": "",
+  "name": "lambda-boilerplate",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MPL-2.0",
+  "author": "LeapDAO <team@leapdao.org>",
   "scripts": {
     "start": "node index.js",
     "test": "./node_modules/.bin/jest",
