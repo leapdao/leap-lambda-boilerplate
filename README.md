@@ -1,4 +1,4 @@
-# PARSEC Labs cli tool/library boilerplate
+# LeapDAO cli tool/library boilerplate
 
 Boilerplate with predefined code style
 
@@ -16,8 +16,8 @@ Includes:
 
 ## Setup the new project
 
-- `git clone --origin boilerplate https://github.com/parsec-labs/parsec-cli-boilerplate.git <your-project-name>`
-- `git remote origin add git@github.com:parsec-labs/<your-project-name>.git && <your-project-name>`
+- `git clone --origin boilerplate https://github.com/leapdao/cli-boilerplate.git <your-project-name>`
+- `git remote origin add git@github.com:leapdao/<your-project-name>.git && <your-project-name>`
 - change name in `package.json`
 - `yarn`
 - Enjoy :-)
