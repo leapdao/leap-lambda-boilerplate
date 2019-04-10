@@ -5,42 +5,32 @@
  * found in the LICENSE file in the root directory of this source tree.
  */
 
-let simpledb;
-
-if (process.env.IS_OFFLINE !== 'true' && process.env.npm_lifecycle_event !== 'test') {
-  const AWS = require('aws-sdk');
-  simpledb = new AWS.SimpleDB({ region: 'eu-west-1' });
-}
+const SimpleDB = require('aws-sdk/clients/simpledb');
 
 module.exports = class SimpleDb {
-
   constructor(tableName) {
-    this.sdb = simpledb;
+    this.sdb = new SimpleDB({ region: 'eu-west-1' });
     this.tableName = tableName;
   }
 
-  _method(name, params) {
+  method(name, params) {
     return new Promise((resolve, reject) => {
       this.sdb[name](params, (err, result) => {
         if (err) return reject(err);
-        resolve(result);
+        return resolve(result);
       });
     });
   }
 
   setAttr(itemName, attrName, attrVal) {
-    if (!this.sdb) return;
     return this.putAttributes({
       DomainName: this.tableName,
       ItemName: itemName,
-      Attributes: [
-        { Name: attrName, Value: attrVal, Replace: true },
-      ],
+      Attributes: [{ Name: attrName, Value: attrVal, Replace: true }],
     });
   }
 
   setAttrs(itemName, attrs) {
-    if (!this.sdb) return;
     return this.putAttributes({
       DomainName: this.tableName,
       ItemName: itemName,
@@ -49,22 +39,23 @@ module.exports = class SimpleDb {
   }
 
   async getAttr(itemName, defaultValue = {}) {
-    if (!this.sdb) return defaultValue;
-
     const data = await this.getAttributes({
       DomainName: this.tableName,
       ItemName: itemName,
     });
 
-    return Object.assign(defaultValue, this.transformAttrs(data.Attributes || []));
+    return Object.assign(
+      defaultValue,
+      this.transformAttrs(data.Attributes || [])
+    );
   }
 
   putAttributes(params) {
-    return this._method('putAttributes', params);
+    return this.method('putAttributes', params);
   }
 
   getAttributes(params) {
-    return this._method('getAttributes', params);
+    return this.method('getAttributes', params);
   }
 
   /**
@@ -78,19 +69,25 @@ module.exports = class SimpleDb {
     const params = {
       SelectExpression: expr,
     };
-    return new Promise((resolve, reject) => 
-      simpledb.select(params, function(err, data) {
+    return new Promise((resolve, reject) =>
+      this.simpledb.select(params, (err, data) => {
         if (err) return reject(err);
-        resolve(data.Items);
-      }));
+        return resolve(
+          data.Items.map(item => ({
+            Name: item.Name,
+            Attributes: this.transformAttrs(item.Attributes || []),
+          }))
+        );
+      })
+    );
   }
 
   // transform from key/value to list and back
-  transformAttrs(data) {
+  static transformAttrs(data) {
     let attributes;
     if (Array.isArray(data)) {
       attributes = {};
-      data.forEach((aPair) => {
+      data.forEach(aPair => {
         if (!attributes[aPair.Name]) {
           attributes[aPair.Name] = {};
         }
@@ -98,9 +95,9 @@ module.exports = class SimpleDb {
       });
     } else {
       attributes = [];
-      Object.keys(data).forEach((anAttributeName) => {
+      Object.keys(data).forEach(anAttributeName => {
         if (Array.isArray(data[anAttributeName])) {
-          data[anAttributeName].forEach((aValue) => {
+          data[anAttributeName].forEach(aValue => {
             attributes.push({
               Name: anAttributeName,
               Value: aValue,
@@ -116,6 +113,4 @@ module.exports = class SimpleDb {
     }
     return attributes;
   }
-
-
-}
+};
