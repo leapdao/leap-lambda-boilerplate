@@ -70,7 +70,7 @@ module.exports = class SimpleDb {
       SelectExpression: expr,
     };
     return new Promise((resolve, reject) =>
-      this.simpledb.select(params, (err, data) => {
+      this.sdb.select(params, (err, data) => {
         if (err) return reject(err);
         return resolve(
           data.Items.map(item => ({
