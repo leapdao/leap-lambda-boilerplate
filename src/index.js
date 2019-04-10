@@ -9,5 +9,6 @@ const SimpleDb = require('./simpleDb');
 const DynamoDb = require('./dynamoDb');
 const Errors = require('./errors');
 const Queue = require('./queue');
+const Properties = require('./properties');
 
-module.exports = { Errors, Queue, DynamoDb, SimpleDb };
+module.exports = { Errors, Queue, DynamoDb, SimpleDb, Properties };
