@@ -27,7 +27,9 @@
     "bracketSpacing": true
   },
   "keywords": [],
-  "dependencies": {},
+  "dependencies": {
+    "aws-sdk": "^2.437.0"
+  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
