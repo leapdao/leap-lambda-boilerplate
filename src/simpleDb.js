@@ -34,7 +34,7 @@ module.exports = class SimpleDb {
     return this.putAttributes({
       DomainName: this.tableName,
       ItemName: itemName,
-      Attributes: this.transformAttrs(attrs),
+      Attributes: SimpleDb.transformAttrs(attrs),
     });
   }
 
@@ -46,7 +46,7 @@ module.exports = class SimpleDb {
 
     return Object.assign(
       defaultValue,
-      this.transformAttrs(data.Attributes || [])
+      SimpleDb.transformAttrs(data.Attributes || [])
     );
   }
 
@@ -73,9 +73,9 @@ module.exports = class SimpleDb {
       this.sdb.select(params, (err, data) => {
         if (err) return reject(err);
         return resolve(
-          data.Items.map(item => ({
+          (data.Items || []).map(item => ({
             Name: item.Name,
-            Attributes: this.transformAttrs(item.Attributes || []),
+            Attributes: SimpleDb.transformAttrs(item.Attributes || []),
           }))
         );
       })
