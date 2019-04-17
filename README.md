@@ -8,7 +8,7 @@
 
 ## Usage
 
-- `git clone --origin boilerplate https://github.com/leapdao/lambda-boilerplate.git <your-project-name>`
+- `git clone --origin boilerplate https://github.com/leapdao/leap-lambda-boilerplate.git <your-project-name>`
 - `cd <your-project-name> && git remote add origin git@github.com:leapdao/<your-project-name>.git`
 - change name in `package.json`
 - `yarn`
