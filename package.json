@@ -1,6 +1,6 @@
 {
   "name": "leap-lambda-boilerplate",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "main": "src/index.js",
   "license": "MPL-2.0",
   "author": "LeapDAO <team@leapdao.org>",
@@ -27,8 +27,8 @@
     "bracketSpacing": true
   },
   "keywords": [],
-  "dependencies": {
-    "aws-sdk": "^2.437.0"
+  "peerDependencies": {
+    "aws-sdk": "^2.843.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
